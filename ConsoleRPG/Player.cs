@@ -9,5 +9,11 @@ namespace ConsoleRPG.PlayerCharacter
     {
         public Position position;
         public char Representative;
+
+        public Player()
+        {
+            position = new Position(0, 0);
+            Representative = 'P';
+        }
     }
 }

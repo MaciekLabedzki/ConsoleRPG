@@ -11,9 +11,11 @@ namespace ConsoleRPG.Map
 
         public bool Walkable;
 
-        public Tile()
+        public Tile(Position p, char terrain, bool walkable)
         {
-
+            Position = p;
+            Terrain = terrain;
+            Walkable = walkable;
         }
     }
 }
