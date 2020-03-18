@@ -28,8 +28,14 @@ namespace ConsoleRPG.Map
         {
             string ret = "";
 
-            foreach(List<Tile> row in Tiles)
+            ret += ShowTopBottmFrame();
+
+            foreach (List<Tile> row in Tiles)
             {
+                //left frame
+                ret += "|";
+
+                //fill
                 foreach(Tile tile in row)
                 {
                     char tmp;
@@ -40,8 +46,26 @@ namespace ConsoleRPG.Map
 
                     ret += tmp;
                 }
-                ret += '\n';
+
+                //right frame
+                ret += "|"+'\n';
             }
+
+            ret += ShowTopBottmFrame();
+
+            return ret;
+        }
+
+        private string ShowTopBottmFrame()
+        {
+            string ret = "";
+
+            //top frame
+            for (int i = 0; i < Tiles.Count + 2; i++)
+            {
+                ret += "-";
+            }
+            ret += '\n';
 
             return ret;
         }
