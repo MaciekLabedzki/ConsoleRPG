@@ -1,5 +1,4 @@
-﻿using System;
-using ConsoleRPG.Map;
+﻿using ConsoleRPG.Game;
 
 namespace ConsoleRPG.App
 {
@@ -7,12 +6,7 @@ namespace ConsoleRPG.App
     {
         static void Main(string[] args)
         {
-            /* //kod do wyświetlenia samego grida
-            Console.WriteLine("It should show 10x10 grid" + '\n' + '\n' );
-            Grid grid = new Grid();
-            Console.WriteLine(grid.GridToString());
-            Console.ReadKey(); 
-            */
+            GameLoop game = new GameLoop();
         }
     }
 }

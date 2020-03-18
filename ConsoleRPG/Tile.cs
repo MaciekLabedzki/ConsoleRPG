@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ConsoleRPG.Map
+﻿namespace ConsoleRPG.Map
 {
-    class Tile
+    public class Tile
     {
         public Position Position;
         public char Terrain;

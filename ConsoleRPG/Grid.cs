@@ -1,16 +1,17 @@
-﻿using System;
+﻿using ConsoleRPG.PlayerCharacter;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ConsoleRPG.Map
 {
     public class Grid
     {
-        private List<List<Tile>> Tiles;
+        public List<List<Tile>> Tiles;
+        public Player player;
 
-        public Grid()
+        public Grid(Player p)
         {
             int size = 10;
+            player = p;
 
             Tiles = new List<List<Tile>>();
             for (int y = 0; y < size; y++)
@@ -31,7 +32,13 @@ namespace ConsoleRPG.Map
             {
                 foreach(Tile tile in row)
                 {
-                    ret += tile.Terrain;
+                    char tmp;
+                    if ((player.Position.X == tile.Position.X) && (player.Position.Y == tile.Position.Y))
+                        tmp = player.Representative;
+                    else
+                        tmp = tile.Terrain;
+
+                    ret += tmp;
                 }
                 ret += '\n';
             }

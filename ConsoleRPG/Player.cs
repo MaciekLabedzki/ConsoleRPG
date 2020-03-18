@@ -7,13 +7,18 @@ namespace ConsoleRPG.PlayerCharacter
 {
     public class Player
     {
-        public Position position;
+        public Position Position;
         public char Representative;
 
-        public Player()
+        public Player(int x, int y)
         {
-            position = new Position(0, 0);
+            Position = new Position(x, y);
             Representative = 'P';
+        }
+
+        public string ShowPosition()
+        {
+            return Position.X.ToString() + ":" + Position.Y.ToString();
         }
     }
 }
