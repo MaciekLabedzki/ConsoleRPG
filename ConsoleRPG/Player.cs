@@ -18,7 +18,16 @@ namespace ConsoleRPG.PlayerCharacter
 
         public string ShowPosition()
         {
-            return Position.X.ToString() + ":" + Position.Y.ToString();
+            return "Player position" + '\n' + 
+                "X: " + Position.X.ToString() + "- Y:" + Position.Y.ToString();
         }
+    }
+
+    public enum Directions
+    {
+        Left,
+        Right,
+        Up,
+        Down
     }
 }
