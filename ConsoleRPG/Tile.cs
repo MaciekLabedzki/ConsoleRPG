@@ -1,4 +1,6 @@
-﻿namespace ConsoleRPG.Map
+﻿using ConsoleRPG.Items;
+
+namespace ConsoleRPG.Map
 {
     public class Tile
     {
@@ -6,6 +8,7 @@
         public char Terrain;
 
         public bool Walkable;
+        public Collectable Item;
 
         public Tile(Position p, char terrain, bool walkable)
         {
@@ -13,5 +16,36 @@
             Terrain = terrain;
             Walkable = walkable;
         }
+
+        public Tile(Position p, TerrainTypes t)
+        {
+            Position = p;
+            switch (t)
+            {
+                case TerrainTypes.floor:
+                    Terrain = ' ';
+                    Walkable = true;
+                    break;
+                case TerrainTypes.wall:
+                    Terrain = '█';
+                    Walkable = false;
+                    break;
+                default:
+                    Terrain = ' ';
+                    Walkable = true;
+                    break;
+            }
+        }
+
+        public void UpdateTile()
+        {
+            //this function updates tiles graphics
+        }
+    }
+
+    public enum TerrainTypes
+    {
+        floor = 0,
+        wall = 1
     }
 }

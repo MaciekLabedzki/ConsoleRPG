@@ -9,16 +9,27 @@ namespace ConsoleRPG.PlayerCharacter
     {
         public Position Position;
         public char Representative;
+        public int Gold { get; set; }
 
         public Player(int x, int y)
         {
             Position = new Position(x, y);
             Representative = 'P';
+            Gold = 0;
         }
 
         public string ShowPosition()
         {
-            return Position.X.ToString() + ":" + Position.Y.ToString();
+            return "Player position" + '\n' + 
+                "X: " + Position.X.ToString() + "- Y:" + Position.Y.ToString();
         }
+    }
+
+    public enum Directions
+    {
+        Left,
+        Right,
+        Up,
+        Down
     }
 }

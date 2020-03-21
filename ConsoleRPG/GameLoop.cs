@@ -21,28 +21,34 @@ namespace ConsoleRPG.Game
                 Console.Clear();
                 Console.WriteLine("It should show 10x10 grid with a player on 0x0" + '\n' + "Press Escape to exit." + '\n' + '\n');
                 Console.WriteLine(Grid.GridToString());
+                Console.WriteLine(Player.ShowPosition());
                 choice = Console.ReadKey(false).Key;
 
                 switch (choice)
                 {
                     case ConsoleKey.LeftArrow:
-                        Player.Position.X--;
+                        if(Player.Position.X!=0 && Grid.CheckNeighborWalkability(Directions.Left))
+                            Player.Position.X--;
                         break;
                     case ConsoleKey.RightArrow:
-                        Player.Position.X++;
+                        if (Player.Position.X != Grid.size - 1 && Grid.CheckNeighborWalkability(Directions.Right))
+                            Player.Position.X++;
                         break;
                     case ConsoleKey.UpArrow:
-                        Player.Position.Y--;
+                        if (Player.Position.Y != 0 && Grid.CheckNeighborWalkability(Directions.Up))
+                            Player.Position.Y--;
                         break;
                     case ConsoleKey.DownArrow:
-                        Player.Position.Y++;
+                        if (Player.Position.Y != Grid.size - 1 && Grid.CheckNeighborWalkability(Directions.Down))
+                            Player.Position.Y++;
                         break;
                     case ConsoleKey.Escape:
                         return;
                     default:
                         break;
-
                 }
+
+                
             }
         }
     }

@@ -1,5 +1,8 @@
 ﻿using ConsoleRPG.PlayerCharacter;
+using System;
 using System.Collections.Generic;
+
+//(char) 219
 
 namespace ConsoleRPG.Map
 {
@@ -7,11 +10,12 @@ namespace ConsoleRPG.Map
     {
         public List<List<Tile>> Tiles;
         public Player player;
+        public int size;
 
         public Grid(Player p)
         {
-            int size = 10;
             player = p;
+            size = 15;
 
             Tiles = new List<List<Tile>>();
             for (int y = 0; y < size; y++)
@@ -19,9 +23,38 @@ namespace ConsoleRPG.Map
                 Tiles.Add(new List<Tile>());
                 for (int x = 0; x < size; x++)
                 {
-                    Tiles[y].Add(new Tile(new Position(x, y), '.', true));
+                    Tiles[y].Add(RandomTile(new Position(x,y))); //add random
                 }
             }
+        }
+
+        public Tile RandomTile(Position p)
+        { 
+            int tmp = Enum.GetValues(typeof(TerrainTypes)).Length;
+            return new Tile(p, (TerrainTypes)new Random().Next(0,(int)(tmp*5)));
+        }
+
+        public bool CheckNeighborWalkability(Directions direction)
+        {
+            int x = 0, y = 0;
+
+            switch (direction)
+            {
+                case Directions.Left:
+                    x--;
+                    break;
+                case Directions.Right:
+                    x++;
+                    break;
+                case Directions.Up:
+                    y--;
+                    break;
+                case Directions.Down:
+                    y++;
+                    break;
+            }
+
+            return Tiles[player.Position.Y + y][player.Position.X + x].Walkable;
         }
 
         public string GridToString()
