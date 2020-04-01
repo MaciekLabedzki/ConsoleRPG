@@ -18,10 +18,11 @@ namespace ConsoleRPG.PlayerCharacter
             Gold = 0;
         }
 
-        public string ShowPosition()
+        public string ShowPlayer()
         {
-            return "Player position" + '\n' + 
-                "X: " + Position.X.ToString() + "- Y:" + Position.Y.ToString();
+            return "Player" + '\n' + 
+                "Position [X.Y] : " + Position.X.ToString() + "." + Position.Y.ToString() +'\n'+
+                "Gold: " + Gold.ToString();
         }
     }
 

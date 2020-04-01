@@ -4,14 +4,14 @@ namespace ConsoleRPG.Items
 {
     public class GoldCoin : Collectable
     {
-        public GoldCoin(int amount)
+        public GoldCoin(int amount = 1)
         {
             Amount = amount;
             Name = "Gold Coin";
-            Representable = 'o';
+            Representative = 'o';
         }
 
-        public new void Collect(Player p)
+        public override void Collect(Player p)
         {
             p.Gold += Amount;
             base.Collect(p);

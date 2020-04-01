@@ -1,4 +1,5 @@
-﻿using ConsoleRPG.Map;
+﻿using ConsoleRPG.Items;
+using ConsoleRPG.Map;
 using ConsoleRPG.PlayerCharacter;
 using System;
 
@@ -12,16 +13,19 @@ namespace ConsoleRPG.Game
         public GameLoop()
         {
             Player = new Player(1, 1);
-            Grid = new Grid(Player);
+            Grid = new Grid(Player, 12); //generate grid with 12 gold coins
             ConsoleKey choice;
 
             while (true)
             {
+                //wyświetlanie itemków
+                Grid.UpdateTiles();
+
                 //kod do wyświetlenia samego grida
                 Console.Clear();
-                Console.WriteLine("It should show 10x10 grid with a player on 0x0" + '\n' + "Press Escape to exit." + '\n' + '\n');
+                //Console.WriteLine("It should show 10x10 grid with a player on 0x0" + '\n' + "Press Escape to exit." + '\n' + '\n');
                 Console.WriteLine(Grid.GridToString());
-                Console.WriteLine(Player.ShowPosition());
+                Console.WriteLine(Player.ShowPlayer());
                 choice = Console.ReadKey(false).Key;
 
                 switch (choice)
@@ -47,8 +51,6 @@ namespace ConsoleRPG.Game
                     default:
                         break;
                 }
-
-                
             }
         }
     }

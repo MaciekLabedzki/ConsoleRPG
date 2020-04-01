@@ -7,9 +7,14 @@ namespace ConsoleRPG.Items
     {
         public string Name { get; set; }
         public int Amount { get; set; }
-        public char Representable { get; set; }
+        public char Representative { get; set; }
 
-        public void Collect(Player p)
+        public Collectable()
+        {
+            Name = "";
+        }
+
+        public virtual void Collect(Player p)
         {
             Console.WriteLine("You found " + Amount.ToString() + " of " + Name + ".");
         }

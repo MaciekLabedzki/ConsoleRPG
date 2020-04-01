@@ -1,4 +1,5 @@
-﻿using ConsoleRPG.PlayerCharacter;
+﻿using ConsoleRPG.Items;
+using ConsoleRPG.PlayerCharacter;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +13,7 @@ namespace ConsoleRPG.Map
         public Player player;
         public int size;
 
-        public Grid(Player p)
+        public Grid(Player p, int amount)
         {
             player = p;
             size = 15;
@@ -26,6 +27,8 @@ namespace ConsoleRPG.Map
                     Tiles[y].Add(RandomTile(new Position(x,y))); //add random
                 }
             }
+
+            GenerateCollectable(amount);
         }
 
         public Tile RandomTile(Position p)
@@ -57,6 +60,28 @@ namespace ConsoleRPG.Map
             return Tiles[player.Position.Y + y][player.Position.X + x].Walkable;
         }
 
+        public void GenerateCollectable(int amount)
+        {
+            int i = 0;
+
+            while ( i<amount )
+            {
+                Random rand = new Random();
+                int x = rand.Next(0, size);
+                int y = rand.Next(0, size);
+                
+                if (Tiles[y][x].Walkable)
+                {
+                    Tiles[y][x].Item = new GoldCoin(); ///CHANGE IT ON GENERAL COLLECTABLE!
+                    Console.WriteLine(x.ToString() + "." + y.ToString());
+                    Console.ReadKey(false);
+                    Console.WriteLine(Tiles[y][x].Item.Representative);
+                    Console.WriteLine(Tiles[y][x].Item.Name);
+                }
+                i++;
+            }
+        }
+
         public string GridToString()
         {
             string ret = "";
@@ -75,7 +100,7 @@ namespace ConsoleRPG.Map
                     if ((player.Position.X == tile.Position.X) && (player.Position.Y == tile.Position.Y))
                         tmp = player.Representative;
                     else
-                        tmp = tile.Terrain;
+                        tmp = tile.Representative;
 
                     ret += tmp;
                 }
@@ -101,6 +126,26 @@ namespace ConsoleRPG.Map
             ret += '\n';
 
             return ret;
+        }
+
+        public void UpdateTiles()
+        {
+            //player is updated in gridtostring()
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    Tile tmp = Tiles[y][x];
+
+                    //check if player get any collectables
+                    if ((player.Position.X == x && player.Position.Y == y) && tmp.Item != null)
+                    {
+                        tmp.Item.Collect(player);
+                        tmp.Item = null;
+                    }
+                    tmp.UpdateTile();
+                }
+            }
         }
     }
 }
